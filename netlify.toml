@@ -1,0 +1,8 @@
+# Paper Bastion: a static game in public/ plus one function for the leaderboard.
+[build]
+  publish = "public"
+  command = "echo 'No build step: the game is a single HTML file.'"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
