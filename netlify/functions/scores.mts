@@ -2,7 +2,7 @@ import { getStore } from "@netlify/blobs";
 import type { Config, Context } from "@netlify/functions";
 
 // One blob per player per board holds that player's best run:
-//   best/<map>/<difficulty>/<player key>
+//   best/<map>/<difficulty>/<player key>   (Daily Ink: best/daily/<YYYY-MM-DD>/<player key>)
 // Every accepted post is also logged once under runs/... (append-only) so
 // scores can be audited or rebuilt. No counters or read-modify-write state.
 
@@ -37,6 +37,13 @@ async function loadBoard(map: string, diff: string): Promise<Best[]> {
 }
 
 function readBoardParams(map: unknown, diff: unknown): { map: string; diff: string } | string {
+  // The Daily Ink has one board per calendar day, keyed by the player's local date.
+  if (map === "daily") {
+    if (typeof diff !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(diff)) return "Unknown day.";
+    const day = Date.parse(diff + "T12:00:00Z");
+    if (!Number.isFinite(day) || Math.abs(day - Date.now()) > 2 * 86400000) return "That Daily Ink is closed.";
+    return { map, diff };
+  }
   if (typeof map !== "string" || !MAPS.includes(map)) return "Unknown map.";
   if (typeof diff !== "string" || !DIFFS.includes(diff)) return "Unknown difficulty.";
   return { map, diff };

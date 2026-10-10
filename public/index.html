@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui;background:#faf9f5}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Paper Bastion</title><meta name="description" content="A papercraft tower defense game. Eight towers, fifteen enemies, six maps, thirty waves, and an online leaderboard."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect x=%2214%22 y=%2222%22 width=%2236%22 height=%2234%22 rx=%224%22 fill=%22%23f7f0e1%22/%3E%3Cpath d=%22M8 24L18 6l10 18z%22 fill=%22%23e9564c%22/%3E%3Cpath d=%22M36 24L46 6l10 18z%22 fill=%22%23e9564c%22/%3E%3Cpath d=%22M26 56V44a6 6 0 0112 0v12z%22 fill=%22%233a3460%22/%3E%3C/svg%3E">
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui;background:#faf9f5}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Paper Bastion</title><meta name="description" content="A papercraft tower defense game. Eight towers, fifteen enemies, six maps, thirty waves, a Daily Ink challenge and an online leaderboard."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect x=%2214%22 y=%2222%22 width=%2236%22 height=%2234%22 rx=%224%22 fill=%22%23f7f0e1%22/%3E%3Cpath d=%22M8 24L18 6l10 18z%22 fill=%22%23e9564c%22/%3E%3Cpath d=%22M36 24L46 6l10 18z%22 fill=%22%23e9564c%22/%3E%3Cpath d=%22M26 56V44a6 6 0 0112 0v12z%22 fill=%22%233a3460%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@500;600;700;800&display=swap">
 <style>
 /* Layout: one-screen game. A paper diorama board sits on a cutting mat; paper tags above and below hold the controls. */
@@ -147,7 +147,33 @@ h2 { font: 400 30px/1 var(--display); text-wrap: balance; }
 .bigstars s { text-decoration: none; color: var(--gold); text-shadow: 0 2px 0 var(--gold-deep); }
 .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-#lbOv { z-index: 7; }
+#lbOv, #shopOv { z-index: 7; }
+.extras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.xcard { text-align: left; display: flex; flex-direction: column; gap: 5px; padding: 12px 14px; border-radius: 14px; background: var(--paper-2); box-shadow: 0 3px 0 var(--paper-edge); min-width: 0; }
+.xcard b { font: 400 18px/1.1 var(--display); }
+.xcard > span:not(.label) { font: 600 12.5px/1.35 var(--ui); color: var(--ink-soft); }
+.xcard .xsub { font-weight: 800 !important; color: var(--ink) !important; }
+.xcard.daily { background: var(--ink); color: var(--paper); box-shadow: 0 3px 0 #120f2b; }
+.xcard.daily .label, .xcard.daily > span:not(.label) { color: #c9c4ea !important; }
+.xcard.daily .xsub { color: var(--gold) !important; }
+.xcard:active { transform: translateY(2px); }
+.lbtabs button.daily { background: var(--ink); color: var(--paper); box-shadow: 0 2px 0 #120f2b; }
+.lbtabs button.daily.sel { background: var(--gold); color: var(--ink); box-shadow: 0 2px 0 var(--gold-deep); }
+.perks { display: flex; flex-direction: column; gap: 6px; }
+.perk { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--paper-2); }
+.ptx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ptx b { font: 400 16px/1.1 var(--display); }
+.ptx span { font: 600 12.5px/1.3 var(--ui); color: var(--ink-soft); }
+.pips { display: flex; gap: 4px; }
+.pips i { width: 16px; height: 6px; border-radius: 3px; background: var(--paper-edge); }
+.pips i.on { background: var(--gold); }
+.perk .buy { min-width: 74px; padding-block: 6px; }
+.maxed { font: 800 12px/1 var(--ui); color: var(--gold-deep); letter-spacing: .06em; text-transform: uppercase; }
+.seal { display: inline-flex; align-items: center; gap: 4px; font: 400 14px/1 var(--display); }
+.seal::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--coral); box-shadow: inset 0 -2px 0 var(--coral-deep); }
+.seal.sealn { font-size: 17px; }
+.tb.ban { opacity: .32; filter: grayscale(1); }
+.tb.ban::after { content: ''; position: absolute; left: 18%; right: 18%; top: 50%; height: 3px; background: var(--coral); transform: rotate(-35deg); border-radius: 2px; }
 .lb { max-width: 560px; gap: 12px; }
 .lbhead { display: flex; align-items: center; justify-content: space-between; }
 .lbtabs { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -214,6 +240,9 @@ h2 { font: 400 30px/1 var(--display); text-wrap: balance; }
   .act.x { display: none; }
   .card { padding: 18px 16px 16px; gap: 13px; }
   .maps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .extras { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .xcard { padding: 10px 12px; gap: 3px; }
+  .xcard b { font-size: 16px; }
   .map { padding: 5px; gap: 4px; border-radius: 11px; }
   .map canvas { border-radius: 6px; }
   .map b { font-size: 12.5px; line-height: 1.1; }
@@ -274,6 +303,10 @@ h2 { font: 400 30px/1 var(--display); text-wrap: balance; }
     <p class="lede">Ink is creeping across the page. Build towers along the road and hold the keep through 30 waves.</p>
     <div class="maps" id="maps"></div>
     <p class="maptag" id="mapTag"></p>
+    <div class="extras">
+      <button class="xcard daily" id="xDaily"><span class="label">Daily Ink · <span id="dDate"></span></span><b id="dName"></b><span id="dTip"></span><span class="xsub" id="dBest"></span></button>
+      <button class="xcard" id="xShop"><span class="label">Workshop</span><b><span id="xSeals">0</span> seals</b><span>Spend seals on small perks that carry into every normal game.</span><span class="xsub">Earn 1 seal per 5 waves you reach, plus 2 per star.</span></button>
+    </div>
     <div class="row"><span class="label">Difficulty</span><div class="seg" id="diffs"></div><span class="grow"></span><button class="big alt" id="bBoard">Leaderboard</button><button class="big" id="bPlay">Play</button></div>
     <p class="maptag" id="diffTag"></p>
     <ul class="tips">
@@ -289,11 +322,17 @@ h2 { font: 400 30px/1 var(--display); text-wrap: balance; }
   </div>
 </div>
 <div class="ov" id="result" hidden>
-  <div class="card small"><h2 id="rTitle"></h2><div class="bigstars" id="rStars"></div><p class="lede" id="rText"></p>
+  <div class="card small"><h2 id="rTitle"></h2><div class="bigstars" id="rStars"></div><p class="lede" id="rText"></p><p class="postmsg" id="rSeals"></p>
     <div class="res"><div><b id="rWave"></b><span class="label">Wave</span></div><div><b id="rKills"></b><span class="label">Blots wiped</span></div><div><b id="rLives"></b><span class="label">Lives left</span></div></div>
     <div class="post" id="rPost" hidden><input id="rName" maxlength="16" placeholder="Your name" autocomplete="nickname" aria-label="Your name for the leaderboard"><button class="big" id="rPostBtn">Post score</button></div>
     <p class="postmsg" id="rPostMsg"></p>
     <div class="btns"><button class="big" id="rEndless" hidden>Keep going</button><button class="big" id="rRetry">Play again</button><button class="big alt" id="rBoard" hidden>Leaderboard</button><button class="big alt" id="rMaps">Maps</button></div>
+  </div>
+</div>
+<div class="ov" id="shopOv" hidden>
+  <div class="card lb"><div class="lbhead"><h2>Workshop</h2><button class="rb" id="shopClose" aria-label="Close workshop">✕</button></div>
+    <p class="lede">You have <b class="seal sealn" id="shopSeals">0</b> seals. Perks apply to every normal game. The Daily Ink stays the same for everyone.</p>
+    <div class="perks" id="perks"></div>
   </div>
 </div>
 <div class="ov" id="lbOv" hidden>
@@ -361,6 +400,24 @@ const TD = (function () {
     }
   };
   const RANKS = [25, 75, 175];
+  // Daily Ink twists. Everyone gets the same map, twist and enemy rolls on a given day.
+  const MODS = {
+    bargain: { name: 'Bargain Bin', tip: 'Towers cost 20% less, but Weight and Gust are locked.' },
+    noglue:  { name: 'Unstuck', tip: 'No Glue Pots today.' },
+    swift:   { name: 'Running Ink', tip: 'Enemies move 20% faster and pay 15% more gold.' },
+    glass:   { name: 'Glass Keep', tip: 'Only 5 lives, but every enemy is 20% weaker.' },
+    elite:   { name: 'Elite Day', tip: 'Brutal-style elites show up in every wave.' },
+    purse:   { name: 'Tight Purse', tip: 'Start with 150 gold. Kills pay 25% more.' },
+    pencils: { name: 'Pencils Only', tip: 'No Mortars, Glue Pots or Sparks.' },
+    sky:     { name: 'Sky Day', tip: 'From wave 3, half the Blots and Drips sprout wings and fly.' },
+    rush:    { name: 'Gold Rush', tip: 'Gold scraps come twice as often and pay double. Enemies are 15% tougher.' }
+  };
+  const MOD_ORDER = ['bargain', 'noglue', 'swift', 'glass', 'elite', 'purse', 'pencils', 'sky', 'rush'];
+  function hashStr(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function daily(date) {
+    const h = hashStr('paper-bastion:' + date);
+    return { date, map: h % 6, mod: MOD_ORDER[Math.floor(h / 6) % MOD_ORDER.length], seed: (h % 2000000000) + 1 };
+  }
   const ORDER = ['quill', 'mortar', 'glue', 'spark', 'lens', 'tacks', 'banner', 'press'];
 
   const ENEMIES = {
@@ -524,9 +581,9 @@ const TD = (function () {
   }
 
   class Game {
-    constructor(mapIdx, diffIdx, portrait, seed) {
+    constructor(mapIdx, diffIdx, portrait, seed, opts) {
       const m = MAPS[mapIdx], D = DIFFS[diffIdx];
-      this.mapIdx = mapIdx; this.diffIdx = diffIdx; this.map = m; this.diff = D; this.portrait = !!portrait;
+      this.mapIdx = mapIdx; this.diffIdx = diffIdx; this.map = m; this.diff = Object.assign({}, D); this.portrait = !!portrait;
       this.W = portrait ? GH : GW; this.H = portrait ? GW : GH;
       const tp = p => portrait ? [p[1], p[0]] : [p[0], p[1]];
       this.rng = mulberry(seed || 12345);
@@ -550,6 +607,25 @@ const TD = (function () {
       this.eid = 0; this.tid = 0; this.over = null; this.endless = false;
       this.kills = 0; this.leaks = 0; this.earned = 0;
       this.cd = { weight: 0, gust: 0 }; this.cdMax = { weight: 32, gust: 45 };
+      // workshop perks (never in the Daily Ink) and daily twists
+      const o = opts || {}, P = (!o.daily && o.perks) || {};
+      this.daily = o.daily || null; this.mod = this.daily ? this.daily.mod : null;
+      this.costMul = 1 - .03 * (P.frugal || 0); this.rankMul = 1 - .1 * (P.learn || 0);
+      this.dropMul = 1 + .25 * (P.luck || 0); this.dropRate = 1; this.spdMul = 1; this.banned = {}; this.noAbil = false; this.sky = false;
+      this.gold += 25 * (P.gold || 0); this.lives += P.lives || 0; this.maxLives = this.lives;
+      const cdk = 1 - .1 * (P.cd || 0); this.cdMax.weight *= cdk; this.cdMax.gust *= cdk;
+      switch (this.mod) {
+        case 'bargain': this.costMul *= .8; this.noAbil = true; break;
+        case 'noglue': this.banned.glue = 1; break;
+        case 'swift': this.spdMul = 1.2; this.diff.killGold *= 1.15; break;
+        case 'glass': this.lives = this.maxLives = 5; this.hpMul *= .8; break;
+        case 'elite': this.diff.elite = .35; break;
+        case 'purse': this.gold = 150; this.diff.killGold *= 1.25; break;
+        case 'pencils': this.banned.mortar = this.banned.glue = this.banned.spark = 1; break;
+        case 'sky': this.sky = true; break;
+        case 'rush': this.dropRate = 2; this.dropMul *= 2; this.hpMul *= 1.15; break;
+      }
+      if (this.daily) this.endless = true;
       this.fx = []; this.fxOn = true; this.tmp = { x: 0, y: 0, a: 0 };
     }
     setG(x, y, v) { if (x >= 0 && y >= 0 && x < this.W && y < this.H) this.grid[y * this.W + x] = v; }
@@ -573,12 +649,15 @@ const TD = (function () {
       }
     }
     towerAt(c, r) { for (const t of this.towers) if (t.c === c && t.r === r) return t; return null; }
+    costOf(kind) { return Math.round(TOWERS[kind].cost * this.costMul); }
+    collect(v) { this.gold += v; this.earned += v; }
+    rankNeed(i) { return Math.round(RANKS[i] * this.rankMul); }
     build(kind, c, r) {
-      const T = TOWERS[kind];
-      if (this.over || !T || !this.canBuild(c, r, kind) || this.gold < T.cost) return null;
-      this.gold -= T.cost;
+      const T = TOWERS[kind], cost = T && this.costOf(kind);
+      if (this.over || !T || this.banned[kind] || !this.canBuild(c, r, kind) || this.gold < cost) return null;
+      this.gold -= cost;
       const t = { id: ++this.tid, kind, c, r, x: c + .5, y: r + .5, lvl: 0, spec: -1, cool: .2, angle: -Math.PI / 2, mode: 'first',
-        spent: T.cost, kills: 0, fireT: -9, beams: [], rootT: 0, builtT: this.time, jamT: 0, bd: 0, br: 0, brg: 0, springT: 0, made: 0, bw: this.wave, rank: 0 };
+        spent: cost, kills: 0, fireT: -9, beams: [], rootT: 0, builtT: this.time, jamT: 0, bd: 0, br: 0, brg: 0, springT: 0, made: 0, bw: this.wave, rank: 0 };
       this.towers.push(t); this.setG(c, r, T.road ? 5 : 4); this.recalcBuffs();
       this.emit({ k: 'build', x: t.x, y: t.y, kind });
       return t;
@@ -586,8 +665,8 @@ const TD = (function () {
     upgradeCost(t, spec) {
       const T = TOWERS[t.kind];
       if (t.spec >= 0) return null;
-      if (t.lvl < 2) return T.lv[t.lvl + 1].cost;
-      return T.sp[spec || 0].cost;
+      if (t.lvl < 2) return Math.round(T.lv[t.lvl + 1].cost * this.costMul);
+      return Math.round(T.sp[spec || 0].cost * this.costMul);
     }
     upgrade(t, spec) {
       const c = this.upgradeCost(t, spec);
@@ -598,7 +677,7 @@ const TD = (function () {
       this.emit({ k: 'upgrade', x: t.x, y: t.y, kind: t.kind });
       return true;
     }
-    sellValue(t) { return Math.round(t.spent * (this.time - t.builtT < 3 && t.spent === TOWERS[t.kind].cost ? 1 : .7)); }
+    sellValue(t) { return Math.round(t.spent * (this.time - t.builtT < 3 && t.spent === this.costOf(t.kind) ? 1 : .7)); }
     sell(t) {
       const i = this.towers.indexOf(t); if (i < 0) return;
       this.gold += this.sellValue(t); this.towers.splice(i, 1); this.setG(t.c, t.r, TOWERS[t.kind].road ? 1 : 0); this.recalcBuffs();
@@ -631,10 +710,11 @@ const TD = (function () {
       return true;
     }
     spawn(type, pi, d, w, mul, gold) {
+      if (this.sky && w >= 3 && (type === 'blot' || type === 'drip') && (this.skyN = (this.skyN || 0) + 1) % 2 === 0) type = 'moth';
       const E = ENEMIES[type], D = this.diff, s = this.hpMul * hpScale(w) * (mul || 1) * (E.fly ? this.airMul : 1) * (E.boss ? D.bossHp : 1);
       const e = {
         id: ++this.eid, type, E, pi, w, path: E.fly ? this.flyPaths[pi] : this.paths[pi], d: d || 0,
-        hp: E.hp * s, max: E.hp * s, spd: E.spd, armor: (E.armor || 0) * (1 + .07 * w), r: E.r, fly: !!E.fly,
+        hp: E.hp * s, max: E.hp * s, spd: E.spd * this.spdMul, armor: (E.armor || 0) * (1 + .07 * w), r: E.r, fly: !!E.fly,
         gold: gold != null ? gold : E.gold * D.killGold, off: E.boss ? 0 : (this.rng() - .5) * (E.fly ? .9 : .34),
         x: 0, y: 0, a: 0, slowT: 0, slowF: 1, stun: 0, vuln: 0, hitT: -9, healT: 2, spawnT: 5,
         seed: this.rng() * 6.283, dead: false, born: this.time, hopT: 2.4, hopAt: -9, hid: false, dmgT: -9, shield: 0, shieldMax: 0, regen: 0, elite: null
@@ -673,7 +753,7 @@ const TD = (function () {
         e.dead = true; this.kills++; this.gold += e.gold; this.earned += e.gold;
         if (t) {
           t.kills++;
-          if (t.rank < 3 && t.kills >= RANKS[t.rank]) { t.rank++; t.rankT = this.time; this.emit({ k: 'rank', x: t.x, y: t.y, rank: t.rank, kind: t.kind }); }
+          if (t.rank < 3 && t.kills >= this.rankNeed(t.rank)) { t.rank++; t.rankT = this.time; this.emit({ k: 'rank', x: t.x, y: t.y, rank: t.rank, kind: t.kind }); }
         }
         this.emit({ k: 'die', x: e.x, y: e.y, type: e.type, r: e.r, gold: Math.round(e.gold), fly: e.fly });
         const kids = e.E.split || e.E.pop || 0;
@@ -854,7 +934,7 @@ const TD = (function () {
       }
     }
     ability(name, x, y) {
-      if (this.over || this.cd[name] > 0 || this.wave === 0) return false;
+      if (this.over || this.noAbil || this.cd[name] > 0 || this.wave === 0) return false;
       if (name === 'weight') {
         const R = 1.6, dmg = 60 + 24 * this.wave, k0 = this.kills;
         for (const e of this.enemies) {
@@ -951,7 +1031,7 @@ const TD = (function () {
     continueEndless() { if (this.over === 'win') { this.over = null; this.endless = true; this.autoOn = false; } }
   }
 
-  return { RANKS, GW, GH, DT, WAVES, AUTO, TOWERS, ORDER, ENEMIES, MAPS, DIFFS, Game, waveDef, wavePreview, posAt, hpScale,
+  return { RANKS, MODS, daily, GW, GH, DT, WAVES, AUTO, TOWERS, ORDER, ENEMIES, MAPS, DIFFS, Game, waveDef, wavePreview, posAt, hpScale,
     _tune(l, e) { HP_LIN = l; HP_EXP = e; } };
 })();
 
@@ -978,7 +1058,7 @@ const TD = (function () {
 
   /* ---------- storage ---------- */
   const store = {
-    d: { best: {}, muted: false, snd: 2, map: 0, diff: 1 },
+    d: { best: {}, muted: false, snd: 2, map: 0, diff: 1, seals: 0, perks: {}, daily: {} },
     load() { try { const s = localStorage.getItem('paperBastion.v1'); if (s) Object.assign(this.d, JSON.parse(s)); } catch (e) { } },
     save() { try { localStorage.setItem('paperBastion.v1', JSON.stringify(this.d)); } catch (e) { } }
   };
@@ -1011,7 +1091,7 @@ const TD = (function () {
       g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
       s.connect(f); f.connect(g); g.connect(this.out); s.start(t); s.stop(t + dur + .03);
     },
-    music(want) { if (this.ac && store.d.snd === 2 && this.ac.state === 'running') Music.tick(this.ac, this.mus, this.nb, want); },
+    music(want, o) { if (this.ac && store.d.snd === 2 && this.ac.state === 'running') Music.tick(this.ac, this.mus, this.nb, want, o); },
     play(n) {
       if (!this.ac || !store.d.snd) return;
       const now = performance.now(), gap = { multi: 150, rank: 300, dart: 55, die: 50, hit: 60, zap: 80, glue: 200, boom: 70, lob: 90, tack: 110, print: 60 }[n] || 30;
@@ -1079,6 +1159,30 @@ const TD = (function () {
         { c: [64, 68, 71], b: 40, m: [[0, 76, 2], [2, 80, 2], [4, 83, 2], [6, 88, 2], [8, 86, 2], [10, 83, 2], [12, 80, 2], [14, 76, 2]], fill: true }
       ]
     };
+    // two more lead lines over the same battle chords, so maps can sound different
+    const LEADS = {
+      B: [
+        [[0, 69, 1], [2, 72, 1], [3, 76, 2], [6, 74, 1], [7, 72, 1], [8, 76, 3], [11, 79, 1], [12, 81, 4]],
+        [[0, 77, 2], [2, 76, 1], [3, 72, 2], [6, 69, 2], [8, 72, 2], [10, 77, 2], [12, 76, 2], [14, 74, 2]],
+        [[0, 72, 1], [2, 76, 1], [3, 79, 2], [6, 84, 2], [8, 83, 1], [9, 79, 1], [10, 76, 2], [12, 79, 4]],
+        [[0, 83, 2], [2, 79, 1], [3, 74, 2], [6, 79, 2], [8, 81, 2], [10, 83, 2], [12, 86, 4]],
+        [[0, 81, 1], [1, 79, 1], [2, 76, 2], [4, 72, 2], [6, 76, 2], [8, 81, 3], [11, 83, 1], [12, 84, 4]],
+        [[0, 84, 2], [2, 81, 2], [4, 77, 2], [6, 81, 2], [8, 79, 2], [10, 77, 2], [12, 76, 2], [14, 77, 2]],
+        [[0, 74, 1], [1, 77, 1], [2, 81, 2], [4, 86, 2], [6, 84, 2], [8, 81, 2], [10, 77, 2], [12, 74, 4]],
+        [[0, 76, 2], [2, 80, 2], [4, 83, 2], [6, 88, 2], [8, 86, 1], [9, 83, 1], [10, 80, 2], [12, 76, 4]]
+      ],
+      C: [
+        [[0, 76, 6], [6, 74, 2], [8, 72, 4], [12, 69, 4]],
+        [[0, 72, 4], [4, 77, 4], [8, 76, 4], [12, 72, 4]],
+        [[0, 79, 6], [6, 77, 2], [8, 76, 4], [12, 72, 4]],
+        [[0, 74, 4], [4, 79, 4], [8, 83, 6], [14, 81, 2]],
+        [[0, 81, 6], [6, 79, 2], [8, 76, 4], [12, 72, 4]],
+        [[0, 77, 4], [4, 81, 4], [8, 84, 4], [12, 81, 4]],
+        [[0, 81, 4], [4, 77, 4], [8, 74, 4], [12, 77, 4]],
+        [[0, 76, 4], [4, 80, 4], [8, 83, 8]]
+      ]
+    };
+    for (const k in LEADS) SONG['battle' + k] = SONG.battle.map((b, i) => ({ c: b.c, b: b.b, fill: b.fill, m: LEADS[k][i] }));
     const DR = {
       calm:   { k: 'x.........x.....', s: '................', h: '..x...x...x...x.' },
       battle: { k: 'x.....x.x.....x.', s: '....x.......x...', h: 'x.x.x.x.x.x.x.xx' },
@@ -1112,28 +1216,36 @@ const TD = (function () {
       if (kind === 's') note(ac, out, 'triangle', 196, t, .07, vol * .9, .4);
     }
     // schedule one 16th-note step of a section at audio time t
-    function sched(ac, out, nb, sec, step, t) {
-      const bars = SONG[sec], B = bars[Math.floor(step / 16) % bars.length], s = step % 16, d = DR[sec], calm = sec === 'calm', boss = sec === 'boss';
-      for (const m of B.m) if (m[0] === s) note(ac, out, calm ? 'square' : 'pulse', hz(m[1]), t, m[2] * SD * .94, calm ? .034 : .05);
-      if (calm) { if (s % 2 === 0) note(ac, out, 'square', hz(B.c[[0, 1, 2, 1][(s / 2) % 4]] + 12), t, SD * 1.7, .012, .3); }
-      else note(ac, out, 'square', hz(B.c[[0, 1, 2, 1][s % 4]] + 12), t, SD * .9, .018, .4);
-      if (calm) { if (s === 0) note(ac, out, 'triangle', hz(B.b), t, SD * 7.5, .13); else if (s === 8) note(ac, out, 'triangle', hz(B.b + 7), t, SD * 6, .11); }
-      else if (boss) note(ac, out, 'triangle', hz(B.b + (s % 4 === 2 ? 12 : 0)), t, SD * .9, .15);
-      else if (s % 2 === 0) note(ac, out, 'triangle', hz(B.b + [0, 0, 12, 0, 0, 0, 12, 7][s / 2]), t, SD * 1.8, .15);
-      const fill = B.fill && s >= 13;
+    // o: { lead: 'A' | 'B' | 'C', tr: semitones, lvl: 0-3 intensity (battle only) }
+    function sched(ac, out, nb, sec, step, t, o) {
+      o = o || { lead: 'A', tr: 0, lvl: 3 };
+      const key = sec === 'battle' && o.lead && o.lead !== 'A' ? 'battle' + o.lead : sec, tr = o.tr || 0;
+      const bars = SONG[key], B = bars[Math.floor(step / 16) % bars.length], s = step % 16, d = DR[sec], calm = sec === 'calm', boss = sec === 'boss';
+      const lvl = sec === 'battle' ? (o.lvl == null ? 3 : o.lvl) : 3;
+      if (lvl >= 2) for (const m of B.m) if (m[0] === s) {
+        note(ac, out, calm ? 'square' : 'pulse', hz(m[1] + tr), t, m[2] * SD * .94, calm ? .034 : .05);
+        if (sec === 'battle' && lvl >= 3) note(ac, out, 'square', hz(m[1] + tr - 12), t, m[2] * SD * .9, .018, .5);
+      }
+      if (calm) { if (s % 2 === 0) note(ac, out, 'square', hz(B.c[[0, 1, 2, 1][(s / 2) % 4]] + 12 + tr), t, SD * 1.7, .012, .3); }
+      else if (lvl >= 1) note(ac, out, 'square', hz(B.c[[0, 1, 2, 1][s % 4]] + 12 + tr), t, SD * .9, .018, .4);
+      if (calm) { if (s === 0) note(ac, out, 'triangle', hz(B.b + tr), t, SD * 7.5, .13); else if (s === 8) note(ac, out, 'triangle', hz(B.b + 7 + tr), t, SD * 6, .11); }
+      else if (boss) note(ac, out, 'triangle', hz(B.b + tr + (s % 4 === 2 ? 12 : 0)), t, SD * .9, .15);
+      else if (s % 2 === 0) note(ac, out, 'triangle', hz(B.b + tr + [0, 0, 12, 0, 0, 0, 12, 7][s / 2]), t, SD * 1.8, .15);
+      const fill = B.fill && s >= 13 && lvl >= 1;
       if (d.k[s] === 'x') hit(ac, out, nb, 'k', t, calm ? .12 : .24);
-      if (d.s[s] === 'x' || fill) hit(ac, out, nb, 's', t, fill ? .07 + (s - 13) * .02 : .12);
-      if (d.h[s] === 'x') hit(ac, out, nb, 'h', t, (calm ? .025 : .04) * (s % 4 === 0 ? 1 : boss && s % 2 ? .45 : .7));
+      if ((d.s[s] === 'x' && lvl >= 1) || fill) hit(ac, out, nb, 's', t, fill ? .07 + (s - 13) * .02 : .12);
+      if (d.h[s] === 'x' || (sec === 'battle' && lvl >= 3)) hit(ac, out, nb, 'h', t, (calm ? .025 : .04) * (s % 4 === 0 ? 1 : (boss || lvl >= 3) && s % 2 ? .45 : .7));
     }
-    let sec = 'calm', step = 0, next = 0;
+    let sec = 'calm', step = 0, next = 0, cur = null;
     return {
       SD, sched,
-      tick(ac, out, nb, want) {
+      tick(ac, out, nb, want, o) {
         const now = ac.currentTime;
-        if (next < now - .25) { next = now + .06; step = 0; sec = want; }
+        if (next < now - .25) { next = now + .06; step = 0; sec = want; cur = o; }
         while (next < now + .2) {
-          if (step % 16 === 0 && want !== sec) { sec = want; step = 0; }
-          sched(ac, out, nb, sec, step, next); next += SD; step++;
+          if (step % 16 === 0) { if (want !== sec) { sec = want; step = 0; } cur = o; }
+          else if (step % 4 === 0 && o && cur && o.lvl > cur.lvl) cur = o;   // build up on the beat, calm down on the bar
+          sched(ac, out, nb, sec, step, next, cur); next += SD; step++;
         }
       }
     };
@@ -1571,7 +1683,7 @@ const TD = (function () {
   let sel = null, buildKind = null, ghost = null, hover = null, aimMode = null, lastTouch = false;
   let speed = 1, paused = false, inMenu = true, acc = 0, last = 0, vt = 0, view = { s: 1, tile: 40 }, endT = 0, hintLock = 0;
   let parts = [], decals = [], rings = [], bolts = [], floats = [], banner = null, shake = 0, hurtFlash = 0, castleHit = 0, gustT = 0, weightFx = null;
-  let slowmo = 0, whiteFlash = 0, lowPulse = 0, beatT = 0, smokeT = 0, lastMulti = 0;
+  let slowmo = 0, whiteFlash = 0, lowPulse = 0, beatT = 0, smokeT = 0, lastMulti = 0, drops = [], dropT = 8, dailyMode = null;
 
   function wantPortrait() { const r = stage.getBoundingClientRect(); return r.width < r.height * .92; }
   function layout() {
@@ -1586,7 +1698,9 @@ const TD = (function () {
     tctx.setTransform(view.s, 0, 0, view.s, 0, 0); drawTerrain(tctx, game, false);
   }
   function newGame(preview) {
-    game = new Game(selMap, selDiff, wantPortrait(), (Math.random() * 1e9) | 0); game.runId = Math.random().toString(36).slice(2, 12);
+    if (!preview && dailyMode) game = new Game(dailyMode.map, 1, wantPortrait(), dailyMode.seed, { daily: dailyMode });
+    else game = new Game(selMap, selDiff, wantPortrait(), (Math.random() * 1e9) | 0, { perks: store.d.perks });
+    game.runId = Math.random().toString(36).slice(2, 12); drops = []; dropT = 8;
     sel = null; buildKind = null; ghost = null; aimMode = null; paused = false; acc = 0; endT = 0;
     parts = []; decals = []; rings = []; bolts = []; floats = []; banner = null; shake = 0; hurtFlash = 0; weightFx = null; gustT = 0;
     slowmo = 0; whiteFlash = 0; lowPulse = 0; beatT = 0;
@@ -1698,6 +1812,42 @@ const TD = (function () {
     if (gustT > 0) gustT -= dt;
   }
 
+  /* ---------- gold scraps to tap ---------- */
+  function stepDrops(dt) {
+    const g = game; if (!g || inMenu || g.over) return;
+    if (g.wave > 0 && (g.enemies.length || g.spawns.length) && (dropT -= dt * g.dropRate) <= 0) {
+      dropT = rand(11, 18);
+      const fromLeft = Math.random() < .5, y = rand(1, g.H - 1);
+      drops.push({ x: fromLeft ? -.2 : g.W + .2, y, vx: (fromLeft ? 1 : -1) * rand(.45, .7), vy: rand(-.12, .12), life: 0, max: 9, seed: Math.random() * 9, val: Math.round((6 + 2.2 * g.wave) * g.dropMul) });
+    }
+    for (let i = drops.length - 1; i >= 0; i--) {
+      const d = drops[i]; d.life += dt; d.x += d.vx * dt; d.y += (d.vy + Math.sin(d.life * 2 + d.seed) * .25) * dt;
+      if (d.life > d.max || d.x < -.6 || d.x > g.W + .6) drops.splice(i, 1);
+    }
+  }
+  function dropAt(x, y) { for (const d of drops) if ((d.x - x) ** 2 + (d.y - y + .28) ** 2 < .5) return d; return null; }
+  function grabDrop(d) {
+    drops.splice(drops.indexOf(d), 1); game.collect(d.val);
+    float(d.x, d.y - .2, '+' + d.val, '#ffd166', 19); burst(d.x, d.y, 14, ['#f2b632', '#fff', '#ffe36e'], 220, 'bit', .6);
+    rings.push({ x: d.x, y: d.y, r0: .1, r1: .8, life: 0, max: .3, col: '242,182,50', w: 5 }); Snd.play('print'); hud.bump();
+  }
+  function drawDrops(c) {
+    for (const d of drops) {
+      const fade = d.max - d.life < 1.6 ? (Math.sin(d.life * 18) > 0 ? 1 : .35) : 1, x = d.x * U, y = d.y * U - 18, rot = Math.sin(d.life * 2.4 + d.seed) * .5;
+      c.globalAlpha = fade;
+      c.fillStyle = 'rgba(26,22,58,.16)'; c.beginPath(); c.ellipse(x + 6, y + 26, 12, 5, 0, 0, TAU); c.fill();
+      c.fillStyle = 'rgba(255,214,102,' + (.22 + .12 * Math.sin(d.life * 6)) + ')'; circ(c, x, y, 27);
+      c.save(); c.translate(x, y); c.rotate(rot); c.scale(1.35, 1.35);
+      c.fillStyle = '#c58a12'; c.beginPath(); c.moveTo(-12, -9); c.lineTo(12, -11); c.lineTo(13, 10); c.lineTo(-11, 12); c.closePath(); c.fill();
+      c.fillStyle = '#f2b632'; c.beginPath(); c.moveTo(-12, -11); c.lineTo(12, -12); c.lineTo(12, 8); c.lineTo(-11, 10); c.closePath(); c.fill();
+      c.fillStyle = '#ffd97a'; tri(c, 12, -12, 12, -2, 3, -12);
+      c.strokeStyle = '#c58a12'; c.lineWidth = 2; c.beginPath(); c.arc(0, -1, 5, 0, TAU); c.stroke();
+      c.restore();
+      c.fillStyle = '#fff'; const sp = (d.life * 3 + d.seed) % 2; if (sp < 1) { const a = sp * Math.PI; circ(c, x + Math.cos(a * 3) * 16, y - 14 + Math.sin(a) * 4, 2.2 * Math.sin(a)); }
+    }
+    c.globalAlpha = 1;
+  }
+
   /* ---------- render ---------- */
   function ringShape(x, y, r) {
     ctx.fillStyle = 'rgba(255,255,255,.13)'; circ(ctx, x * U, y * U, r * U);
@@ -1771,7 +1921,7 @@ const TD = (function () {
       const ok = g.canBuild(gh.c, gh.r, buildKind), x = gh.c + .5, y = gh.r + .5;
       if (ok) {
         if (TOWERS[buildKind].lv[0].range > 0) ringShape(x, y, TOWERS[buildKind].lv[0].range);
-        c.save(); c.translate(x * U, y * U); c.globalAlpha = g.gold >= TOWERS[buildKind].cost ? .85 : .4; drawTower(c, buildKind, 0, -1, -Math.PI / 2, 0, T); c.restore(); c.globalAlpha = 1;
+        c.save(); c.translate(x * U, y * U); c.globalAlpha = g.gold >= g.costOf(buildKind) ? .85 : .4; drawTower(c, buildKind, 0, -1, -Math.PI / 2, 0, T); c.restore(); c.globalAlpha = 1;
       } else if (g.getG(gh.c, gh.r) < 4) {
         c.strokeStyle = 'rgba(233,86,76,.9)'; c.lineWidth = 6; c.lineCap = 'round'; c.beginPath();
         c.moveTo(x * U - 13, y * U - 13); c.lineTo(x * U + 13, y * U + 13); c.moveTo(x * U + 13, y * U - 13); c.lineTo(x * U - 13, y * U + 13); c.stroke(); c.lineCap = 'butt';
@@ -1833,6 +1983,7 @@ const TD = (function () {
       }
     }
     for (const e of EN) if (e.fly) drawEnemy(c, e, T);
+    drawDrops(c);
     for (const e of EN) drawHp(c, e);
 
     for (const p of parts) {
@@ -1947,7 +2098,9 @@ const TD = (function () {
       this.set('vLives', g.lives); this.set('vGold', Math.floor(g.gold)); this.set('vWave', g.wave);
       this.set('vWaveMax', g.endless ? '' : '/' + WAVES);
       for (const kind of ORDER) {
-        const b = this.btns[kind], poor = g.gold < TOWERS[kind].cost, s = buildKind === kind;
+        const cost = g.costOf(kind), b = this.btns[kind], poor = g.gold < cost, s = buildKind === kind, ban = !!g.banned[kind];
+        if (b._c !== cost) { b._c = cost; b.querySelector('.cost').textContent = cost; }
+        if (b._b !== ban) { b._b = ban; b.classList.toggle('ban', ban); b.title = ban ? TOWERS[kind].name + ' is not allowed in today\'s Daily Ink' : TOWERS[kind].name + ': ' + TOWERS[kind].blurb; }
         if (b._p !== poor) { b._p = poor; b.classList.toggle('poor', poor); }
         if (b._s !== s) { b._s = s; b.classList.toggle('sel', s); }
       }
@@ -1981,7 +2134,7 @@ const TD = (function () {
       flyHint = fl;
       // abilities
       for (const [id, n] of [['aWeight', 'weight'], ['aGust', 'gust']]) {
-        const b = $(id), f = g.wave === 0 ? 1 : clamp(g.cd[n] / g.cdMax[n], 0, 1), q = Math.round(f * 50) / 50;
+        const b = $(id), f = g.wave === 0 || g.noAbil ? 1 : clamp(g.cd[n] / g.cdMax[n], 0, 1), q = Math.round(f * 50) / 50;
         if (b._f !== q) { b._f = q; b.style.setProperty('--cd', q); b.disabled = q > 0; }
         const arm = aimMode === n; if (b._a !== arm) { b._a = arm; b.classList.toggle('arm', arm); }
       }
@@ -1997,8 +2150,8 @@ const TD = (function () {
         $('pName').textContent = t.spec >= 0 ? T.sp[t.spec].name + ' ' + T.name : T.name;
         const A = $('pA'), B = $('pB'), set = (b, u, em, cost) => { b.children[0].textContent = u; b.children[1].textContent = em; b.children[2].textContent = cost; };
         A.hidden = t.spec >= 0; B.hidden = !(t.spec < 0 && t.lvl === 2);
-        if (t.spec < 0 && t.lvl < 2) set(A, 'Upgrade', statLine(t.kind, T.lv[t.lvl + 1], true), T.lv[t.lvl + 1].cost);
-        else if (t.spec < 0) { set(A, T.sp[0].name, T.sp[0].tag, T.sp[0].cost); set(B, T.sp[1].name, T.sp[1].tag, T.sp[1].cost); }
+        if (t.spec < 0 && t.lvl < 2) set(A, 'Upgrade', statLine(t.kind, T.lv[t.lvl + 1], true), g.upgradeCost(t, 0));
+        else if (t.spec < 0) { set(A, T.sp[0].name, T.sp[0].tag, g.upgradeCost(t, 0)); set(B, T.sp[1].name, T.sp[1].tag, g.upgradeCost(t, 1)); }
         $('pAim').hidden = !canAim(t.kind);
       }
       const lv = t.spec >= 0 ? 'Mastered' : 'Level ' + (t.lvl + 1);
@@ -2036,21 +2189,23 @@ const TD = (function () {
     if (inMenu || !game) return hint(null);
     if (aimMode) return hint('Pick a spot for the <b>paperweight</b>', true);
     if (buildKind) { const T = TOWERS[buildKind]; return hint('<b>' + T.name + '</b> · ' + T.blurb + (ghost ? ' Tap again to build.' : ''), true); }
+    if (game.wave === 0 && game.daily) { const M = TD.MODS[game.mod]; return hint('<b>Daily Ink: ' + M.name + '.</b> ' + M.tip + ' It never ends: see how far you get.', true); }
     if (game.wave === 0) return hint(game.towers.length ? 'Ready? Press <b>Start</b>.' : 'Pick a tower below, then tap a tile beside the road.', true);
     hint(null);
   }
 
   /* ---------- actions ---------- */
-  function pickBuild(kind) { buildKind = kind; ghost = null; aimMode = null; if (kind) sel = null; Snd.play('tick'); baseHint(); }
+  function pickBuild(kind) { if (kind && game && game.banned[kind]) { Snd.play('no'); hint('<b>' + TOWERS[kind].name + '</b> is not allowed in today\'s Daily Ink.'); return; } buildKind = kind; ghost = null; aimMode = null; if (kind) sel = null; Snd.play('tick'); baseHint(); }
   function select(t) { sel = t; buildKind = null; ghost = null; aimMode = null; baseHint(); }
   function tryBuild(c, r) {
     const T = TOWERS[buildKind];
-    if (game.gold < T.cost) { Snd.play('no'); hint('Not enough gold for a <b>' + T.name + '</b>.'); hud.bump(); return; }
+    if (game.gold < game.costOf(buildKind)) { Snd.play('no'); hint('Not enough gold for a <b>' + T.name + '</b>.'); hud.bump(); return; }
     const t = game.build(buildKind, c, r);
-    if (t) { ghost = null; if (game.gold < T.cost) buildKind = null; baseHint(); }
+    if (t) { ghost = null; if (game.gold < game.costOf(t.kind)) buildKind = null; baseHint(); }
   }
   function tap(c, r, x, y, touch) {
     const g = game; if (!g || g.over) return;
+    const dr = dropAt(x, y); if (dr) return grabDrop(dr);
     if (aimMode === 'weight') { if (g.ability('weight', x, y)) aimMode = null; baseHint(); return; }
     const t = g.towerAt(c, r);
     if (buildKind) {
@@ -2067,6 +2222,7 @@ const TD = (function () {
   function callWave() { Snd.init(); if (game.callWave()) baseHint(); }
   function useAbility(n) {
     Snd.init(); const g = game;
+    if (g.noAbil) { Snd.play('no'); hint('Weight and Gust are locked in today\'s Daily Ink.'); return; }
     if (g.wave === 0 || g.cd[n] > 0) { Snd.play('no'); return; }
     if (n === 'gust') { g.ability('gust'); return; }
     aimMode = aimMode === n ? null : n; buildKind = null; ghost = null; sel = null; baseHint();
@@ -2086,7 +2242,7 @@ const TD = (function () {
     return { x, y, c: Math.floor(x), r: Math.floor(y) };
   }
   cv.addEventListener('pointermove', ev => { if (!game) return; lastTouch = ev.pointerType !== 'mouse'; hover = locate(ev);
-    cv.style.cursor = buildKind || aimMode ? 'crosshair' : game.towerAt(hover.c, hover.r) ? 'pointer' : 'default'; });
+    cv.style.cursor = dropAt(hover.x, hover.y) || (!buildKind && !aimMode && game.towerAt(hover.c, hover.r)) ? 'pointer' : buildKind || aimMode ? 'crosshair' : 'default'; });
   cv.addEventListener('pointerleave', () => { hover = null; });
   cv.addEventListener('pointerdown', ev => {
     if (!game || inMenu) return; ev.preventDefault(); Snd.init();
@@ -2115,7 +2271,7 @@ const TD = (function () {
   $('bSpeed').addEventListener('click', () => setSpeed(speed % 3 + 1));
   $('bPause').addEventListener('click', () => setPause(true));
   $('bResume').addEventListener('click', () => setPause(false));
-  $('bRestart').addEventListener('click', () => { $('pauseOv').hidden = true; start(); });
+  $('bRestart').addEventListener('click', () => { $('pauseOv').hidden = true; start(!!game.daily); });
   $('bMaps').addEventListener('click', () => { $('pauseOv').hidden = true; openMenu(); });
   $('bSound').addEventListener('click', () => { Snd.init(); setSound((store.d.snd + 2) % 3, true); });
   $('pA').addEventListener('click', () => doUpgrade(0));
@@ -2123,12 +2279,47 @@ const TD = (function () {
   $('pAim').addEventListener('click', cycleAim);
   $('pSell').addEventListener('click', doSell);
   $('pClose').addEventListener('click', () => select(null));
-  $('rRetry').addEventListener('click', () => { $('result').hidden = true; start(); });
+  $('rRetry').addEventListener('click', () => { $('result').hidden = true; start(!!game.daily); });
   $('rMaps').addEventListener('click', () => { $('result').hidden = true; openMenu(); });
   $('rEndless').addEventListener('click', () => { $('result').hidden = true; game.continueEndless(); endT = 0; hud.c.nw = null; });
-  $('bPlay').addEventListener('click', () => { Snd.init(); start(); });
+  $('bPlay').addEventListener('click', () => { Snd.init(); start(false); });
   document.addEventListener('pointerup', () => { const a = document.activeElement; if (!inMenu && a && a.tagName === 'BUTTON') a.blur(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden && game && !inMenu && !game.over && game.wave > 0) setPause(true); });
+
+  /* ---------- workshop ---------- */
+  const PERKS = [
+    { id: 'gold', name: 'Deep Pockets', desc: '+25 starting gold per level', costs: [3, 6, 10] },
+    { id: 'lives', name: 'Thick Walls', desc: '+1 life per level', costs: [4, 8, 12] },
+    { id: 'cd', name: 'Quick Hands', desc: 'Weight and Gust recharge 10% faster per level', costs: [3, 6, 10] },
+    { id: 'frugal', name: 'Frugal', desc: 'Towers and upgrades cost 3% less per level', costs: [5, 10, 15] },
+    { id: 'learn', name: 'Fast Learner', desc: 'Towers rank up 10% sooner per level', costs: [4, 9] },
+    { id: 'luck', name: 'Lucky Finds', desc: 'Gold scraps pay 25% more per level', costs: [3, 7] }
+  ];
+  function perkLvl(id) { return (store.d.perks && store.d.perks[id]) | 0; }
+  function renderShop() {
+    $('shopSeals').textContent = store.d.seals | 0;
+    $('perks').innerHTML = PERKS.map(p => {
+      const lv = perkLvl(p.id), max = p.costs.length, cost = p.costs[lv], pips = p.costs.map((c, i) => '<i class="' + (i < lv ? 'on' : '') + '"></i>').join('');
+      return '<div class="perk"><div class="ptx"><b>' + p.name + '</b><span>' + p.desc + '</span><div class="pips">' + pips + '</div></div>' +
+        (lv >= max ? '<span class="maxed">Maxed</span>' : '<button class="act up buy" data-p="' + p.id + '"' + ((store.d.seals | 0) < cost ? ' disabled' : '') + '><u>Buy</u><span class="seal">' + cost + '</span></button>') + '</div>';
+    }).join('');
+    $('xSeals').textContent = store.d.seals | 0;
+  }
+  $('perks').addEventListener('click', ev => {
+    const b = ev.target.closest('.buy'); if (!b) return;
+    const p = PERKS.find(x => x.id === b.dataset.p), lv = perkLvl(p.id), cost = p.costs[lv];
+    if (cost == null || (store.d.seals | 0) < cost) return;
+    store.d.seals -= cost; store.d.perks = store.d.perks || {}; store.d.perks[p.id] = lv + 1; store.save(); Snd.init(); Snd.play('upgrade'); renderShop();
+  });
+  $('xShop').addEventListener('click', () => { Snd.init(); renderShop(); $('shopOv').hidden = false; });
+  $('shopClose').addEventListener('click', () => { $('shopOv').hidden = true; newGame(true); });
+  function syncDaily() {
+    const D = TD.daily(todayStr()), M = TD.MODS[D.mod], best = store.d.daily && store.d.daily.date === D.date ? store.d.daily.wave : 0;
+    const dt = new Date(); $('dDate').textContent = dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    $('dName').textContent = MAPS[D.map].name + ' · ' + M.name; $('dTip').textContent = M.tip;
+    $('dBest').textContent = best ? 'Your best today: wave ' + best : 'Endless. Same map and twist for everyone today.';
+  }
+  $('xDaily').addEventListener('click', () => { Snd.init(); start(true); });
 
   /* ---------- online leaderboard ---------- */
   const LB_HOME = 'https://paper-bastion.netlify.app';
@@ -2160,23 +2351,27 @@ const TD = (function () {
   }
   function buildBoard() {
     const mb = $('lbMaps'), db = $('lbDiffs');
+    const dbn = document.createElement('button'); dbn.textContent = 'Daily Ink'; dbn.id = 'lbm_daily'; dbn.className = 'daily'; dbn.addEventListener('click', () => { lbMap = 'daily'; loadBoard(); }); mb.appendChild(dbn);
     MAPS.forEach((m, i) => { const b = document.createElement('button'); b.textContent = m.name; b.id = 'lbm_' + i; b.addEventListener('click', () => { lbMap = i; loadBoard(); }); mb.appendChild(b); });
     DIFFS.forEach((d, i) => { const b = document.createElement('button'); b.textContent = d.name; b.id = 'lbd_' + i; b.addEventListener('click', () => { lbDiff = i; loadBoard(); }); db.appendChild(b); });
   }
   async function loadBoard(hi) {
+    const isD = lbMap === 'daily', today = todayStr();
     MAPS.forEach((m, i) => $('lbm_' + i).classList.toggle('sel', i === lbMap));
+    $('lbm_daily').classList.toggle('sel', isD); $('lbDiffs').hidden = isD;
     DIFFS.forEach((d, i) => $('lbd_' + i).classList.toggle('sel', i === lbDiff));
     const list = $('lbList'), note = $('lbNote'), key = lbMap + ':' + lbDiff; list.dataset.k = key;
+    const bMap = isD ? 'daily' : MAPS[lbMap].id, bDiff = isD ? today : DIFFS[lbDiff].id, label = isD ? 'today\'s Daily Ink (' + TD.MODS[TD.daily(today).mod].name + ' on ' + MAPS[TD.daily(today).map].name + ')' : MAPS[lbMap].name + ' · ' + DIFFS[lbDiff].name;
     if (!(await LB.check())) { list.innerHTML = ''; note.innerHTML = lbOffline(); return; }
     note.textContent = ''; list.innerHTML = '<div class="lbrow sk"></div><div class="lbrow sk"></div><div class="lbrow sk"></div>';
     try {
-      const res = await LB.top(MAPS[lbMap].id, DIFFS[lbDiff].id);
+      const res = await LB.top(bMap, bDiff);
       if (list.dataset.k !== key) return;
       const rows = res.rows || [];
-      if (!rows.length) { list.innerHTML = ''; note.textContent = 'No scores on ' + MAPS[lbMap].name + ' · ' + DIFFS[lbDiff].name + ' yet. Be the first.'; return; }
+      if (!rows.length) { list.innerHTML = ''; note.textContent = 'No scores on ' + label + ' yet. Be the first.'; return; }
       const me = (store.d.name || '').toLowerCase();
       list.innerHTML = rows.map((r, i) => '<div class="lbrow' + (r.name.toLowerCase() === me ? ' me' : '') + (hi && r.name.toLowerCase() === me ? ' new' : '') + '"><span class="lbpos">' + (i + 1) + '</span><span class="lbname">' + esc(r.name) + '</span><span class="lbwave"><b>' + r.wave + '</b>' + (r.won ? '<i title="Held all 30 waves">★</i>' : '') + '</span><span class="lblives">' + r.lives + ' ♥</span></div>').join('');
-      note.textContent = 'Best run per player. Ranked by wave reached, then lives left.';
+      note.textContent = (isD ? 'Today\'s board resets at midnight. ' : '') + 'Best run per player. Ranked by wave reached, then lives left.';
     } catch (e) { if (list.dataset.k === key) { list.innerHTML = ''; note.textContent = e.message; } }
   }
   function openBoard(m, d, hi) { lbMap = m; lbDiff = d; $('lbOv').hidden = false; loadBoard(hi); }
@@ -2192,13 +2387,13 @@ const TD = (function () {
     if (posted) return;
     store.d.name = name; store.save(); $('rPostBtn').disabled = true; $('rPostMsg').textContent = 'Posting…';
     try {
-      const r = await LB.submit({ name, map: MAPS[g.mapIdx].id, difficulty: DIFFS[g.diffIdx].id, wave: g.wave, won: g.wave >= WAVES && (g.over === 'win' || g.endless), lives: g.lives, kills: g.kills, runId: g.runId });
-      posted = true; $('rPostMsg').textContent = r.best ? 'Posted. You are #' + r.rank + ' on ' + MAPS[g.mapIdx].name + ' · ' + DIFFS[g.diffIdx].name + '.' : 'Posted. Your best here is still higher, at #' + r.rank + '.';
+      const r = await LB.submit({ name, map: g.daily ? 'daily' : MAPS[g.mapIdx].id, difficulty: g.daily ? g.daily.date : DIFFS[g.diffIdx].id, wave: g.wave, won: g.wave >= WAVES && (g.over === 'win' || g.endless), lives: g.lives, kills: g.kills, runId: g.runId });
+      posted = true; $('rPostMsg').textContent = r.best ? 'Posted. You are #' + r.rank + (g.daily ? ' in today\'s Daily Ink.' : ' on ' + MAPS[g.mapIdx].name + ' · ' + DIFFS[g.diffIdx].name + '.') : 'Posted. Your best here is still higher, at #' + r.rank + '.';
     } catch (e) { $('rPostBtn').disabled = false; $('rPostMsg').textContent = e.message; }
   }
   $('rPostBtn').addEventListener('click', postScore);
   $('rName').addEventListener('keydown', ev => { if (ev.key === 'Enter') postScore(); ev.stopPropagation(); });
-  $('rBoard').addEventListener('click', () => openBoard(game.mapIdx, game.diffIdx, posted));
+  $('rBoard').addEventListener('click', () => openBoard(game.daily ? 'daily' : game.mapIdx, game.diffIdx, posted));
   $('bBoard').addEventListener('click', () => openBoard(selMap, selDiff));
   $('lbClose').addEventListener('click', () => { $('lbOv').hidden = true; });
 
@@ -2225,19 +2420,31 @@ const TD = (function () {
     MAPS.forEach((m, i) => { $('map_' + i).classList.toggle('sel', i === selMap); const b = bestOf(i, selDiff); $('ms_' + i).innerHTML = b && b.win ? stars(b.stars) : b ? 'Best: wave ' + b.wave : stars(0); });
     DIFFS.forEach((d, i) => $('df_' + i).classList.toggle('sel', i === selDiff));
     $('mapTag').textContent = MAPS[selMap].tag;
+    syncDaily(); $('xSeals').textContent = store.d.seals | 0;
     $('diffTag').textContent = DIFFS[selDiff].name + ': ' + DIFFS[selDiff].tag;
     store.d.map = selMap; store.d.diff = selDiff; store.save();
   }
   function openMenu() { inMenu = true; paused = false; $('menu').hidden = false; syncMenu(); newGame(true); baseHint(); }
-  function start() { inMenu = false; $('menu').hidden = true; $('result').hidden = true; newGame(false); setSpeed(1); baseHint(); }
+  function start(daily) { dailyMode = daily ? TD.daily(todayStr()) : null; inMenu = false; $('menu').hidden = true; $('result').hidden = true; newGame(false); setSpeed(1); baseHint(); }
+  function todayStr() { const d = new Date(), p = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()); }
   function showResult() {
     const g = game, win = g.over === 'win', st = win ? g.stars() : 0;
-    const id = MAPS[g.mapIdx].id, did = DIFFS[g.diffIdx].id, best = store.d.best[id] || (store.d.best[id] = {}), prev = best[did];
-    if (!prev || (win && (!prev.win || st > prev.stars)) || (!win && !prev.win && g.wave > prev.wave)) best[did] = { win, stars: st, wave: g.wave };
+    if (!g.sealsPaid) {
+      const earned = Math.floor(g.wave / 5) + (win ? st * 2 : 0); g.sealsPaid = earned;
+      store.d.seals = (store.d.seals | 0) + earned;
+    }
+    if (g.daily) {
+      const cur = store.d.daily || {}; if (cur.date !== g.daily.date || g.wave > (cur.wave | 0)) store.d.daily = { date: g.daily.date, wave: g.wave };
+    } else {
+      const id = MAPS[g.mapIdx].id, did = DIFFS[g.diffIdx].id, best = store.d.best[id] || (store.d.best[id] = {}), prev = best[did];
+      if (!prev || (win && (!prev.win || st > prev.stars)) || (!win && !prev.win && g.wave > prev.wave)) best[did] = { win, stars: st, wave: g.wave };
+    }
     store.save();
-    $('rTitle').textContent = win ? 'The keep stands!' : 'The page is soaked';
+    $('rSeals').textContent = g.sealsPaid ? '+' + g.sealsPaid + (g.sealsPaid === 1 ? ' seal' : ' seals') + ' for the Workshop (' + (store.d.seals | 0) + ' total)' : 'Reach wave 5 to earn Workshop seals.';
+    $('rTitle').textContent = win ? 'The keep stands!' : g.daily ? 'Daily Ink done' : 'The page is soaked';
     $('rStars').innerHTML = stars(st); $('rStars').hidden = !win;
     $('rText').textContent = win ? (st === 3 ? 'Barely a drop got through. Try a harder setting, or keep going for as long as you can.' : 'All 30 waves wiped clean. Lose fewer lives to earn more stars.')
+      : g.daily ? 'You reached wave ' + g.wave + ' in today\'s Daily Ink (' + TD.MODS[g.mod].name + ' on ' + MAPS[g.mapIdx].name + ').'
       : (g.endless ? 'You held on to wave ' + g.wave + ' of the endless flood.' : 'The ink broke through on wave ' + g.wave + ' of ' + WAVES + '. ' + (g.wave < 7 ? 'Crowd your towers around the bends, where they get the longest look at the road.' : 'Mix your towers, upgrade the best-placed ones, and keep something that hits flyers.'));
     $('rWave').textContent = g.wave; $('rKills').textContent = g.kills; $('rLives').textContent = g.lives;
     $('rEndless').hidden = !win; $('result').hidden = false; Snd.play(win ? 'win' : 'lose');
@@ -2254,10 +2461,13 @@ const TD = (function () {
         while (acc >= DT && n < 14) { game.step(); acc -= DT; n++; takeFx(); if (game.over) break; }
         if (n >= 14) acc = 0;
       }
-      if (!paused) stepFx(game.over ? rdt : n * DT);
+      if (!paused) { stepFx(game.over ? rdt : n * DT); stepDrops(n * DT); }
       if (!paused && !game.over) {
         let boss = false; if (!inMenu) for (const e of game.enemies) if (e.E.boss) { boss = true; break; }
-        Snd.music(inMenu ? 'calm' : boss ? 'boss' : (game.enemies.length || game.spawns.length) ? 'battle' : 'calm');
+        const MM = [['A', 0], ['B', 2], ['C', -3], ['A', 5], ['B', -2], ['C', 3]][game.mapIdx] || ['A', 0];
+        let prog = 0; for (const e of game.enemies) { const p = e.d / e.path.total; if (p > prog) prog = p; }
+        const ne = game.enemies.length, lvl = ne === 0 ? 0 : (prog > .72 || ne > 28) ? 3 : (prog > .45 || ne > 12) ? 2 : 1;
+        Snd.music(inMenu ? 'calm' : boss ? 'boss' : (ne || game.spawns.length) ? 'battle' : 'calm', { lead: MM[0], tr: MM[1], lvl });
       }
       if (!inMenu && !paused && !game.over && game.wave > 0 && game.lives <= Math.ceil(game.maxLives * .25)) {
         if (!game.toldLow) { game.toldLow = 1; hint('<b>Last stand!</b> Use Weight and Gust, and patch the leaks.'); Snd.play('sting'); lowPulse = 1; }
@@ -2275,7 +2485,7 @@ const TD = (function () {
   new ResizeObserver(() => { cancelAnimationFrame(rz); rz = requestAnimationFrame(layout); }).observe(stage);
   openMenu();
   requestAnimationFrame(frame);
-  window.__pb = { get game() { return game; }, start, tap, pickBuild, callWave, setSpeed, select, Music, Snd };
+  window.__pb = { drops: () => drops, forceDrop: () => { dropT = 0; stepDrops(.001); }, get game() { return game; }, start, tap, pickBuild, callWave, setSpeed, select, Music, Snd };
 })();
 
 </script>
