@@ -6,7 +6,7 @@ import type { Config, Context } from "@netlify/functions";
 // Every accepted post is also logged once under runs/... (append-only) so
 // scores can be audited or rebuilt. No counters or read-modify-write state.
 
-const MAPS = ["meadow", "loop", "twin", "spiral", "ring", "cut"];
+const MAPS = ["meadow", "loop", "twin", "spiral", "ring", "cut", "tri", "fold", "stitch"];
 const DIFFS = ["casual", "standard", "brutal"];
 const NAME_RE = /^[\p{L}\p{N} _.'!-]{1,16}$/u;
 const TOP_N = 25;
