@@ -18,7 +18,10 @@ Pushing to `main` redeploys the site on Netlify.
 
 ## Ground rules for updates
 
-- Never remove or rename a map id, tower kind or enemy type: saved bests, Workshop perks and leaderboard boards depend on them.
-- Balance target with the bots (abilities on): Standard winnable on every map by the `full`, `ok` and `neo` plans; Brutal hard (roughly 0-7 wins in 27 runs per plan); single-tower spam strategies should not win.
-- New towers need a sprite in `drawTower`, a colour in `TC`, a `statLine` entry, and a place in `ORDER` (keys are `1234567890-`, so more than 11 towers needs a new key scheme).
+- `KNOWLEDGE.md` lists every map, tower, enemy and system with the job it does. Read it before planning, and keep it current.
+- Replacing is allowed. If a new tower, enemy, map or twist does an existing one's job better, or makes it redundant, retire the old one in the same update: remove it from `ORDER`, the waves, the menus or the twist list (and from the server's `MAPS` list for a map), and record its id under "Retired ids" in `KNOWLEDGE.md` with the reason. Reworking an existing piece in place is often better than retiring it.
+- Never reuse a retired id, and never change what an existing id means to something unrelated: saved bests and leaderboard boards are keyed by map id.
+- Keep at least six maps and eight towers, and don't retire more than one map per update.
+- Balance target with the bots (abilities on): Standard winnable on every map by the `full`, `ok` and `neo` plans; Brutal hard (roughly 0-7 wins in 27 runs per plan); single-tower spam strategies should not win. Bot plans live in `src/bot.js`; update them when towers change.
+- New towers need a sprite in `drawTower`, a colour in `TC`, a `statLine` entry, and a place in `ORDER` (keys are `1234567890-`, so more than 11 towers needs a new key scheme or a retirement).
 - New enemies need a colour in `EC`, a shape in `drawEnemy` and a `tip`. New maps need a theme in `THEMES`, a music entry in the `MM` table in ui.js, and their id added to the server's `MAPS` list.
